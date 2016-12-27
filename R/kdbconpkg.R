@@ -34,7 +34,7 @@ initmgr<-function() {
 
   libs=.libPaths()
   for(i in 1:length(libs) ) {
-    jarPath=p(libs[i], "/", pkgname, "/", "java", "/", jar)
+    jarPath=p(libs[i], "/", pkgname, "/", "inst/java", "/", jar)
     print(jarPath)
     .jaddClassPath(jarPath)
   }
