@@ -21,6 +21,7 @@ Note: operation result is not returned back to R session.
 install.packages("devtools")
 
 install.packages("rJava")
+<<<<<<< HEAD
 
 install_github("ocean927/R2QCon")
 
@@ -30,6 +31,17 @@ library(kdbconpkg)
 
 Go to examples section below
 
+=======
+
+install_github("ocean927/R2QCon")
+
+library(rJava)
+
+library(kdbconpkg)
+
+Go to examples section below
+
+>>>>>>> 187b72eb9d3fceaaf27cb20b1599657b7c127064
 
 ## FUNCTIONS:
 ```
