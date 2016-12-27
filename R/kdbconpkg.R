@@ -262,7 +262,6 @@ exec<-function(manager,handle,query) {
   print(elapsed)
 }
 
-
 #' View open handles
 #' @param manager reference to java class
 #' @return list of strings
