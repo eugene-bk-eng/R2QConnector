@@ -13,7 +13,11 @@ install.packages("devtools")
 
 install.packages("rJava")
 
+library(devtools)
+
 install_github("ocean927/R2QCon", force=TRUE)
+
+# usage
 
 library(rJava)
 
