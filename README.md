@@ -1,28 +1,27 @@
 ## PURPOSE:
 A prototype package that connects an R session with Q process. It is used to
 
--Execute Q commands remotely. Note, operation result is not returned back to R session.
--For select statements that return Q tables(98h) pull over the network and convert into R data frame.
+- Execute Q commands remotely. Note, operation result is not returned back to R session.  
+- For select that returns Q tables(98h). It pulls data over the network and converts into R data frame.  
 
-
-## INSTALLATION:
-install.packages("devtools")
-install.packages("rJava")
-library(devtools)
-install_github("ocean927/R2QCon", force=TRUE)
+##INSTALL FROM GITHUB:
+install.packages("devtools")  
+install.packages("rJava")  
+library(devtools)  
+install_github("ocean927/R2QCon", force=TRUE)  
 
 
 ## USAGE
-library(rJava)
-library(kdbconpkg)
+library(rJava)  
+library(kdbconpkg)  
 
 
 ## API:
 ```
 //creates a java connection manager
-initmgr() 
+initmanager() 
 ex: 
-manager = initmgr()
+manager = initmanager()
 
 //connects to Q session
 connect(manager,host,port)
@@ -62,22 +61,16 @@ timespan(n), minute(u), second(v)
 ## CONVERSION TO R TYPES
 Due to performance, package will implement 
 the following conversions:
-
-date(d) - returned to R as numeric
-
-time(t) - returned to R as numeric. 
-
-datetime(z) - returned to R as string "2016.12.24 21:16:38.067 EST"
-
-Implementation may change.
+date(d) - returned to R as numeric  
+time(t) - returned to R as numeric.    
+datetime(z) - returned to R as string "2016.12.24 21:16:38.067 EST"  
 
 ## TODO
-1. [Retrieve dictionary 99h.]
-2. [Map remaining KDB reference types.]
-3. [Write data frame back to Q as a table/dictionary.]
-4. [Improve performance of select.]
-5. [Implement batched retrieval for large tables.]
-
+1. Retrieve dictionary 99h.  
+2. Map remaining KDB reference types.  
+3. Write data frame back to Q as a table/dictionary.  
+4. Improve performance of select.  
+5. Implement batched retrieval for large tables.  
 
 ## DESIGN:
 Package uses Java library to connect to 
@@ -85,15 +78,7 @@ and translate KDB types.
 
 
 ## PERFORMANCE:
-Example:
-KDB and R are started locally.
-
-table: 1M rows x 10 columns, 62455442 bytes.
-
-1. Java library retrieves 1M records in 0.9 seconds.
-
-2. R package retrieves 1M rows and converts to dataframe in ~10 seconds.
-
+Currently converting to R data frame is slow. 
 
 ## EXAMPLE:
 
@@ -106,7 +91,7 @@ t1:([] date:`date$(); time:`time$(); sy:`symbol$(); vboolean:`boolean$(); charva
 `t1 insert(til 1000; .... )
 
 # open session to one or more Q instances
-manager = initmgr()
+manager = initmanager()
 h1  = connect(manager,"localhost", 5000L)
 h2  = connect(manager,"host", "port") 
 
@@ -126,12 +111,6 @@ head(df2)
 close(manager,h1)
 ```
 
-## TROUBLESHOOTING:
-
-1. Java class path not found.
-This is usually solved in your R env.
-
-2. Connection problems if you specify incorrect host/port
 
 ## FEEDBACK:
-For questions and feedback, write to vortexsny@hotmail.com
+For questions, write to vortexsny@hotmail.com

@@ -23,7 +23,7 @@ require(rJava)
 #' Create manager object
 #' @return reference to Java connection manager object
 #' @export
-initmgr<-function() {
+initmanager<-function() {
 
   pkgname="kdbconpkg"
   jar<-"kdbconpkg.jar"
@@ -281,7 +281,7 @@ p <- function(..., sep='') {
 test <- function(){
 
   # open connection
-  manager = initmgr()
+  manager = initmanager()
   h1  = connect(manager,"localhost", 5000L)
 
   #
