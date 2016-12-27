@@ -16,10 +16,13 @@ Note: operation result is not returned back to R session.
 ## INSTALLATION:
 
 install.packages("devtools")
+
 install.packages("rJava")
+
 install_github("ocean927/R2QCon")
 
 library(rJava)
+
 library(kdbconpkg)
 
 Go to examples section below
@@ -70,8 +73,11 @@ timespan(n), minute(u), second(v)
 ## CONVERSION TO R TYPES
 Due to performance, package will implement 
 the following conversions:
+
 date(d) - returned to R as numeric
+
 time(t) - returned to R as numeric. 
+
 datetime(z) - returned to R as string "2016.12.24 21:16:38.067 EST"
 
 Implementation may change.
@@ -92,9 +98,13 @@ and translate KDB types.
 ## PERFORMANCE:
 Example:
 KDB and R are started locally.
+
 table: 1M rows x 10 columns, 62455442 bytes.
+
 1. Java library retrieves 1M records in 0.9 seconds.
+
 2. R package retrieves 1M rows and converts to dataframe in ~10 seconds.
+
 
 ## EXAMPLE:
 
@@ -126,6 +136,7 @@ head(df2)
 # close Q connection.
 close(manager,h1)
 ```
+
 
 ## FEEDBACK:
 For questions and feedback, write to vortexsny@hotmail.com
