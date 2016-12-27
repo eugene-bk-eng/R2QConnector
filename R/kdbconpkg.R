@@ -3,10 +3,19 @@
 require(rJava)
 
 .onLoad <- function(libname, pkgname){
+  print(".onLoad is called")
   cat("libname: ", libname, "\n")
   cat("pkgname: ", pkgname, "\n")
   jarPath<-"../java/kdbconpkg.jar"
   connectionManagerClass<-"com/local/ideas/experiment/kdb/ConMgr"
+}
+
+#' My own onload
+#' @return ref
+#' @export
+myOnLoad <- function(libname, pkgname){
+  print("myOnload is called")
+  .onLoad("", "")
 }
 
 ## example of table with most commonly used  data types
@@ -27,6 +36,10 @@ require(rJava)
 #' @return reference to Java connection manager object
 #' @export
 initmgr<-function() {
+
+  jarPath<-"../java/kdbconpkg.jar"
+  connectionManagerClass<-"com/local/ideas/experiment/kdb/ConMgr"
+
   .jinit()
   .jclassPath()
   .jaddClassPath(jarPath)
@@ -48,7 +61,6 @@ connect<-function(manager,host,port) {
   handle=manager$connect(host, port)
   return (handle)
 }
-
 
 #' Close connection to Q
 #' @param manager reference to Java object in memory
@@ -275,3 +287,5 @@ test <- function(){
 }
 
 #test()
+
+myOnLoad()
