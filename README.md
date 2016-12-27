@@ -2,31 +2,20 @@
 A prototype package that connects an R session with Q process. It can be used to
 
 1. Execute Q commands remotely. 
-```
-"x: 1 2 3"  # create a list
-"t:([] date:`date$(); sy:`symbol$(); " # define a table
-"t:("DS"; enlist ",") 0: `:file.csv" # load csv
-```
-
 Note: operation result is not returned back to R session.
 
-2. Convert Q table result set into R data frame.
-```
-"select from t"
-"10#select from t"
-```
+2. Convert these Q result sets into R data frame.
+
 
 ## INSTALLATION:
 
 install.packages("devtools")
 
 install.packages("rJava")
-<<<<<<< HEAD
 
 install_github("ocean927/R2QCon")
 
 library(rJava)
-
 library(kdbconpkg)
 
 Go to examples section below
@@ -40,8 +29,6 @@ library(rJava)
 library(kdbconpkg)
 
 Go to examples section below
-
->>>>>>> 187b72eb9d3fceaaf27cb20b1599657b7c127064
 
 ## FUNCTIONS:
 ```
