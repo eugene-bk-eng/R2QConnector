@@ -3,17 +3,18 @@
 require(rJava)
 
 .onLoad <- function(libname, pkgname){
+  print(".onLoad is called")
   cat("libname: ", libname, "\n")
   cat("pkgname: ", pkgname, "\n")
   jarPath<-"../java/kdbconpkg.jar"
   connectionManagerClass<-"com/local/ideas/experiment/kdb/ConMgr"
 }
 
-
 #' My own onload
 #' @return ref
 #' @export
-myonLoad <- function(libname, pkgname){
+myOnLoad <- function(libname, pkgname){
+  print("myOnload is called")
   .onLoad("", "")
 }
 
@@ -286,3 +287,5 @@ test <- function(){
 }
 
 #test()
+
+myOnLoad()

@@ -1,5 +1,5 @@
 ## PURPOSE:
-A prototype package connects R session with Q process. It can be used to
+A prototype package that connects an R session with Q process. It can be used to
 
 1. Execute Q commands remotely. 
 "x: 1 2 3"  # create a list
@@ -12,6 +12,17 @@ Note: operation result is not returned back to R session.
 
 "select from t"
 "10#select from t"
+
+## INSTALLATION:
+
+install.packages("devtools")
+install.packages("rJava")
+install_github("ocean927/R2QCon")
+
+library(rJava)
+library(kdbconpkg)
+
+Go to examples section below
 
 
 ## FUNCTIONS:
