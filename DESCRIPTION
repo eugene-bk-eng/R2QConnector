@@ -1,0 +1,9 @@
+Package: kdbconpkg
+Type: Package
+Title: Prototype of connector to KDB.
+Version: 0.1.0
+Author: Eugene Aleksandrov <vortexsbkny@gmail.com>
+Maintainer: Eugene Aleksandrov <vortexsbkny@gmail.com>
+Description: Prototype of connector to KDB.
+License: MIT License.
+RoxygenNote: 5.0.1
