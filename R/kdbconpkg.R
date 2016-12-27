@@ -35,6 +35,10 @@ myonLoad <- function(libname, pkgname){
 #' @return reference to Java connection manager object
 #' @export
 initmgr<-function() {
+
+  jarPath<-"../java/kdbconpkg.jar"
+  connectionManagerClass<-"com/local/ideas/experiment/kdb/ConMgr"
+
   .jinit()
   .jclassPath()
   .jaddClassPath(jarPath)
@@ -56,7 +60,6 @@ connect<-function(manager,host,port) {
   handle=manager$connect(host, port)
   return (handle)
 }
-
 
 #' Close connection to Q
 #' @param manager reference to Java object in memory

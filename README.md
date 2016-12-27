@@ -27,17 +27,14 @@ ex:
 handle  = connect(manager,"localhost", 5000L) 
 
 //execute remote statement
-exec(handle, query)
+exec(manager,handle, query)
 ex:
-manager.exec(handle,"x: 1 2 3")
+exec(manager,handle,"x: 1 2 3")
 
 // retrieve as data frame
-select( handle(int), query(string))
+select(handle, query)
 ex:
 df=select(manager,h1,"3#select from t")
-
-you can also access a low-level Q driver 
-inside conmgr.
 
 // close Q session
 connect(manager(javaref),handle(int))
@@ -90,6 +87,7 @@ table: 1M rows x 10 columns, 62455442 bytes.
 
 ## EXAMPLE:
 
+```
 //create table
 t1:([] date:`date$(); time:`time$(); sy:`symbol$(); vboolean:`boolean$(); charvalue:`char$(); str:();  px:`float$(); volume:`int$(); long:`long$(); tm:`datetime$() )
 
@@ -97,17 +95,14 @@ t1:([] date:`date$(); time:`time$(); sy:`symbol$(); vboolean:`boolean$(); charva
 `t1 insert(2016.12.1; "T"$"07:00:00.000"; `FOO; 0b; "a"; "xyz"; 1.345f; 100; 1099511627776j; .z.Z  )
 `t1 insert(til 1000; .... )
 
-# R code
-```
-
 # open session to one or more Q instances
 manager = initmgr()
 h1  = connect(manager,"localhost", 5000L)
 h2  = connect(manager,"host", "port") 
 
 # execute remotely
-manager.exec(h1,"x: 1 2 3")
-manager.exec(h1,".Q.w[]")
+exec(manager,h1,"x: 1 2 3")
+exec(manager,h1,".Q.w[]")
 
 # retrieve as R data frame
 df1=select(manager,h1,"10#select from t1")
@@ -121,3 +116,5 @@ head(df2)
 close(manager,h1)
 ```
 
+## FEEDBACK:
+For questions and feedback, write to vortexsny@hotmail.com
