@@ -16,15 +16,6 @@ install.packages("rJava")
 install_github("ocean927/R2QCon")
 
 library(rJava)
-library(kdbconpkg)
-
-Go to examples section below
-
-=======
-
-install_github("ocean927/R2QCon")
-
-library(rJava)
 
 library(kdbconpkg)
 
