@@ -3,6 +3,6 @@
 export(close)
 export(connect)
 export(exec)
+export(handles)
 export(initmgr)
-export(myonLoad)
 export(select)

@@ -13,7 +13,7 @@ install.packages("devtools")
 
 install.packages("rJava")
 
-install_github("ocean927/R2QCon")
+install_github("ocean927/R2QCon", force=TRUE)
 
 library(rJava)
 
@@ -130,6 +130,12 @@ head(df2)
 close(manager,h1)
 ```
 
+## TROUBLESHOOTING:
+
+1. Java class path not found.
+This is usually solved in your R env.
+
+2. Connection problems if you specify incorrect host/port
 
 ## FEEDBACK:
 For questions and feedback, write to vortexsny@hotmail.com
