@@ -1,31 +1,23 @@
 ## PURPOSE:
-A prototype package that connects an R session with Q process. It can be used to
+A prototype package that connects an R session with Q process. It is used to
 
-1. Execute Q commands remotely. 
-Note: operation result is not returned back to R session.
-
-2. Convert these Q result sets into R data frame.
+-Execute Q commands remotely. Note, operation result is not returned back to R session.
+-For select statements that return Q tables(98h) pull over the network and convert into R data frame.
 
 
 ## INSTALLATION:
-
 install.packages("devtools")
-
 install.packages("rJava")
-
 library(devtools)
-
 install_github("ocean927/R2QCon", force=TRUE)
 
-# usage
 
+## USAGE
 library(rJava)
-
 library(kdbconpkg)
 
-Go to examples section below
 
-## FUNCTIONS:
+## API:
 ```
 //creates a java connection manager
 initmgr() 
@@ -80,11 +72,11 @@ datetime(z) - returned to R as string "2016.12.24 21:16:38.067 EST"
 Implementation may change.
 
 ## TODO
-1. Retrieve dictionary 99h.
-2. Map remaining KDB reference types.
-3. Write data frame back to Q as a table/dictionary.
-4. Improve performance of select.
-5. Implement batched retrieval for large tables.
+1. [Retrieve dictionary 99h.]
+2. [Map remaining KDB reference types.]
+3. [Write data frame back to Q as a table/dictionary.]
+4. [Improve performance of select.]
+5. [Implement batched retrieval for large tables.]
 
 
 ## DESIGN:
