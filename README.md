@@ -10,13 +10,10 @@ Note: operation result is not returned back to R session.
 ## INSTALLATION:
 
 install.packages("devtools")
-
 install.packages("rJava")
-
 install_github("ocean927/R2QCon")
 
 library(rJava)
-
 library(kdbconpkg)
 
 Go to examples section below
