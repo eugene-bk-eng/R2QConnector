@@ -1,5 +1,5 @@
 ## PURPOSE:
-Package connects R session with KDB process. It can be used to
+A prototype package connects R session with Q process. It can be used to
 
 1. Execute Q commands remotely. 
 "x: 1 2 3"  # create a list
@@ -15,19 +15,19 @@ Note: operation result is not returned back to R session.
 
 
 ## FUNCTIONS:
-
-// creates a java connection manager
-create() 
+```
+//creates a java connection manager
+initmgr() 
 ex: 
-manager = create()
+manager = initmgr()
 
-// connects to Q session
-connect(manager (javaref),host(string),port (string/int))
+//connects to Q session
+connect(manager,host,port)
 ex: 
 handle  = connect(manager,"localhost", 5000L) 
 
-// execute remote statement
-exec( handle, "statement")
+//execute remote statement
+exec(handle, query)
 ex:
 manager.exec(handle,"x: 1 2 3")
 
@@ -41,7 +41,7 @@ inside conmgr.
 
 // close Q session
 connect(manager(javaref),handle(int))
-
+```
 
 ## REQUIREMENTS:
 KDB process live and listening on a  port.
@@ -101,7 +101,7 @@ t1:([] date:`date$(); time:`time$(); sy:`symbol$(); vboolean:`boolean$(); charva
 ```
 
 # open session to one or more Q instances
-manager = create()
+manager = initmgr()
 h1  = connect(manager,"localhost", 5000L)
 h2  = connect(manager,"host", "port") 
 

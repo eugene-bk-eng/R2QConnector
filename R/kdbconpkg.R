@@ -9,6 +9,14 @@ require(rJava)
   connectionManagerClass<-"com/local/ideas/experiment/kdb/ConMgr"
 }
 
+
+#' My own onload
+#' @return ref
+#' @export
+myonLoad <- function(libname, pkgname){
+  .onLoad("", "")
+}
+
 ## example of table with most commonly used  data types
 # t1:([] date:`date$(); time:`time$(); sy:`symbol$(); vboolean:`boolean$(); charvalue:`char$(); str:();  px:`float$(); volume:`int$(); long:`long$(); tm:`datetime$() )
 #`t1 insert(2016.12.15; "T"$"09:30:00.000"; `XYZ; 0b; "a"; "abc"; 1.345f; 100; 1099511627776j; .z.Z  )

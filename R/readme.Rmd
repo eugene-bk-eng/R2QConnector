@@ -113,20 +113,20 @@ t1:([] date:`date$(); time:`time$(); sy:`symbol$(); vboolean:`boolean$(); charva
 ```
 
 # open session to one or more Q instances
-manager = create()
+manager = initmgr()
 h1  = connect(manager,"localhost", 5000L)
 h2  = connect(manager,"host", "port") 
 
 # execute remotely
-manager.exec(h1,"x: 1 2 3")
-manager.exec(h1,".Q.w[]")
+exec(manager,h1,"x: 1 2 3")
+exec(manager,h1,".Q.w[]")
 
 # retrieve as R data frame
 df1=select(manager,h1,"10#select from t1")
 head(df1)
 
 # retrieve as R data frame, Q memory stats
-df2=manager.select(h1,"select from ([] k:key .Q.w[]; v:value .Q.w[])")
+df2=select(manager,h1,"select from ([] k:key .Q.w[]; v:value .Q.w[])")
 head(df2)
 
 # close Q connection.
