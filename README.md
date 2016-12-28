@@ -8,7 +8,7 @@ A prototype package that connects an R session with Q process. It is used to
 install.packages("devtools")  
 install.packages("rJava")  
 library(devtools)  
-install_github("ocean927/R2QCon", force=TRUE)  
+install_github("ocean927/R2QConnector", force=TRUE)  
 
 
 ## USAGE
@@ -100,11 +100,11 @@ exec(manager,h1,"x: 1 2 3")
 exec(manager,h1,".Q.w[]")
 
 # retrieve as R data frame
-df1=select(manager,h1,"10#select from t1")
+df1=select(manager, h1, "10#select from t1")
 head(df1)
 
 # retrieve as R data frame, Q memory stats
-df2=manager.select(h1,"select from ([] k:key .Q.w[]; v:value .Q.w[])")
+df2=select(manager, h1, "select from ([] k:key .Q.w[]; v:value .Q.w[])")
 head(df2)
 
 # close Q connection.
