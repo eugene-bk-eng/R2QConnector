@@ -2,7 +2,7 @@
 R package that connects an R session with multiple Q processes. Use it to
 
 - Execute Q commands remotely.   
-- For select that return Q tables(98h), library will pull the data over the network and convert into R data frame.  
+- For select that returns Q tables(98h), library will pull the data over the network and convert into R data frame.  
 
 
 ##INSTALL FROM GITHUB:
@@ -119,7 +119,6 @@ head(df1)
 
 # retrieve as R data frame, Q memory stats
 df2=select(manager, h1, "select from ([] k:key .Q.w[]; v:value .Q.w[])")
-head(df2)
 
 # show open handles
 handles(manager)
@@ -127,6 +126,31 @@ handles(manager)
 # close Q connection.
 close(manager,h1)
 ```
+
+### OUTPUT:
+```
+> library(rJava)
+> library(kdbconpkg)
+
+> manager = initmanager()
+> h1  = connect(manager,"dev1", 5000L)
+> df=select(manager,h1,"3#select from yahoo_table")
+rows:  3 
+   user  system elapsed 
+   0.09    0.01    0.17 
+
+# notice number of rows and time it create a data frame
+
+> df
+          date sy  open  high   low close adjclose  volume
+1 1.475208e+12  A 46.50 47.32 46.30 47.09 47.09000 1754300
+2 1.475122e+12  A 47.05 47.27 46.14 46.41 46.29500 1938200
+3 1.475035e+12  A 46.90 47.26 46.52 47.18 47.06309 1502500
+
+# notice date column is returned as numeric
+
+```
+
 
 
 ## FEEDBACK:
