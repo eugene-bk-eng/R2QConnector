@@ -1,8 +1,9 @@
 ## PURPOSE:
-R ackage that connects an R session with multiple Q processes. Use it to
+R package that connects an R session with multiple Q processes. Use it to
 
 - Execute Q commands remotely.   
 - For select that return Q tables(98h), library will pull the data over the network and convert into R data frame.  
+
 
 ##INSTALL FROM GITHUB:
 install.packages("devtools")  
@@ -11,36 +12,36 @@ library(devtools)
 install_github("ocean927/R2QConnector", force=TRUE)  
 
 
-## R USAGE
+## USE:
 library(rJava)  
 library(kdbconpkg)  
 
 
 ## R API:
 ```
-//creates connection manager
+#creates connection manager
 initmanager() 
 ex: manager = initmanager()
 
-//connects to Q session
+#connects to Q session
 connect(manager,host,port)
 ex: 
 h1  = connect(manager,"localhost", 5000L) 
 h2  = connect(manager,"remotehost", 9000L) 
 
-//execute remote statement
+#execute remote statement
 exec(manager,handle, query)
 ex: exec(manager,handle,"x: 1 2 3")
 
-// retrieve as data frame
+#retrieve as data frame
 select(handle, query)
 ex:
 df=select(manager,h1,"3#select from t")
 
-// show open handles, returns a list of strings
+#show open handles, returns a list of strings
 handles(manager)
 
-// close Q session
+#close Q session
 connect(manager,handle)
 ```
 
@@ -61,14 +62,14 @@ guid(g), byte(x), short(h), real(e), timestamp(p), month(m),
 timespan(n), minute(u), second(v)
 
 
-## CONVERSION TO R TYPES
+## CONVERSION TO R TYPES:
 Due to performance, package implements the following conversions:  
 date(d) - returned to R as numeric.  
 time(t) - returned to R as numeric.  
 datetime(z) - returned to R as string "2016.12.24 21:16:38.067 EST"    
 
 
-## TODO
+## TODO:
 1. Retrieve dictionary 99h.  
 2. Map remaining KDB reference types.  
 3. Write data frame back to Q as a table/dictionary.  
@@ -88,12 +89,20 @@ Currently converting to R data frame is slow.
 ## EXAMPLE:
 
 ```
-//create table
+#
+# Q code
+#
+
+# create table
 t1:([] date:`date$(); time:`time$(); sy:`symbol$(); vboolean:`boolean$(); charvalue:`char$(); str:();  px:`float$(); volume:`int$(); long:`long$(); tm:`datetime$() )
 
-//fill with dummy data
+# fill with dummy data
 `t1 insert(2016.12.1; "T"$"07:00:00.000"; `FOO; 0b; "a"; "xyz"; 1.345f; 100; 1099511627776j; .z.Z  )
-`t1 insert(til 1000; .... )
+...
+
+#
+# R code
+#
 
 # open session to one or more Q instances
 manager = initmanager()
