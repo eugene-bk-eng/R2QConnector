@@ -1,8 +1,8 @@
 ## PURPOSE:
-A prototype package that connects an R session with Q process. It is used to
+R ackage that connects an R session with multiple Q processes. Use it to
 
-- Execute Q commands remotely. Note, operation result is not returned back to R session.  
-- For select that returns Q tables(98h). It pulls data over the network and converts into R data frame.  
+- Execute Q commands remotely.   
+- For select that return Q tables(98h), library will pull the data over the network and convert into R data frame.  
 
 ##INSTALL FROM GITHUB:
 install.packages("devtools")  
@@ -11,35 +11,37 @@ library(devtools)
 install_github("ocean927/R2QConnector", force=TRUE)  
 
 
-## USAGE
+## R USAGE
 library(rJava)  
 library(kdbconpkg)  
 
 
-## API:
+## R API:
 ```
-//creates a java connection manager
+//creates connection manager
 initmanager() 
-ex: 
-manager = initmanager()
+ex: manager = initmanager()
 
 //connects to Q session
 connect(manager,host,port)
 ex: 
-handle  = connect(manager,"localhost", 5000L) 
+h1  = connect(manager,"localhost", 5000L) 
+h2  = connect(manager,"remotehost", 9000L) 
 
 //execute remote statement
 exec(manager,handle, query)
-ex:
-exec(manager,handle,"x: 1 2 3")
+ex: exec(manager,handle,"x: 1 2 3")
 
 // retrieve as data frame
 select(handle, query)
 ex:
 df=select(manager,h1,"3#select from t")
 
+// show open handles, returns a list of strings
+handles(manager)
+
 // close Q session
-connect(manager(javaref),handle(int))
+connect(manager,handle)
 ```
 
 ## REQUIREMENTS:
@@ -52,18 +54,19 @@ Ex: >q -p 5000
 - The following data types are supported: 
 boolean(b), int(i), long(j), float(f), char(c), symbol(s), 
 date(d), datetime(z), time(t), 
-- Additionally Q list of char(c) known as string 
-will be converted to R string. See exampe:
-- These types are not yet implemented:
+- For convinience, Q list of char(c) known as string 
+will be converted to an R string.
+- These types are not implemented:
 guid(g), byte(x), short(h), real(e), timestamp(p), month(m),
 timespan(n), minute(u), second(v)
 
+
 ## CONVERSION TO R TYPES
-Due to performance, package will implement 
-the following conversions:
-date(d) - returned to R as numeric  
-time(t) - returned to R as numeric.    
-datetime(z) - returned to R as string "2016.12.24 21:16:38.067 EST"  
+Due to performance, package implements the following conversions:  
+date(d) - returned to R as numeric.  
+time(t) - returned to R as numeric.  
+datetime(z) - returned to R as string "2016.12.24 21:16:38.067 EST"    
+
 
 ## TODO
 1. Retrieve dictionary 99h.  
@@ -71,6 +74,8 @@ datetime(z) - returned to R as string "2016.12.24 21:16:38.067 EST"
 3. Write data frame back to Q as a table/dictionary.  
 4. Improve performance of select.  
 5. Implement batched retrieval for large tables.  
+6. Remove manager object and expose only Q handle.
+
 
 ## DESIGN:
 Package uses Java library to connect to 
@@ -107,10 +112,13 @@ head(df1)
 df2=select(manager, h1, "select from ([] k:key .Q.w[]; v:value .Q.w[])")
 head(df2)
 
+# show open handles
+handles(manager)
+
 # close Q connection.
 close(manager,h1)
 ```
 
 
 ## FEEDBACK:
-For questions, write to vortexsny@hotmail.com
+For questions and suggestions, write to vortexsny@hotmail.com
