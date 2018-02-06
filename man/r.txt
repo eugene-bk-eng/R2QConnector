@@ -1,0 +1,9 @@
+{value"\\q load_AAPL.q -p ",string x}each p:(value"\\p") + 1 + til 2;
+\sleep 5
+h:neg hopen each p;h@\:".z.pc:{exit 0}";
+ph:p!h;h!:();qc:()!();
+.z.ps:{$[(w:neg .z.w)in key h;[h[w;0]x;h[w]:1_h w];[h[a?:min a:count each h],:w;qc[a]+:1;a("{(neg .z.w)@[value;x;`error]}";x)]]};
+restart:{h _: ph[x];value"\\q load_AAPL.q -p ",string x;system"sleep 5";nh:neg hopen x;h[nh]:();ph[x]:nh;nh".z.pc:{exit 0}";:`z};
+check:{{{if[((key ph)?"i"$x)<>(count ph);restart[x]]}each x}{@[(neg ph[x]);".z.i";x]}each key ph};
+.z.ts:{check[]};
+\t 5000
